@@ -4,7 +4,11 @@
 
 ```python
 def gcd(x, y):
-    if x > y:
+    if x == 0:
+        return 1
+    if y == 0:
+        raise ZeroDivisionError('Zero can\'t be the den')
+    if abs(x) > abs(y):
         x, y = y, x
     if y % x == 0:
         return x
@@ -40,23 +44,44 @@ class Fraction:
         f2 = self.den * other.num
         return f1 == f2
 
+    def __mul__(self, other):
+        num = self.num * other.num
+        den = self.den * other.den
+        return Fraction(num, den)
+
 
 ans = Fraction(0, 1)
 s = input()
+if s[-1] != '=':
+    s += '='
 pos = 1
 l = 0
-for i in range(len(s) + 1):
-    if i == len(s) or s[i] == '+' or s[i] == '-':
+for i in range(len(s)):
+    if s[i] == '=' or s[i] == '+' or s[i] == '-':
         frac_s = s[l: i].split('/')
-        frac = Fraction(int(frac_s[0]) * pos, int(frac_s[1]))
+        if len(frac_s) == 2:
+            if frac_s[0] == '' or frac_s[1] == '':
+                raise TypeError('"/" can\'t be the first or the last character in a member')
+            try:
+                frac = Fraction(int(frac_s[0]) * pos, int(frac_s[1]))
+            except ValueError:
+                raise ValueError('Some members contain non-numerical characters')
+        elif len(frac_s) == 1:
+            try:
+                frac = Fraction(int(frac_s[0]) * pos, 1)
+            except ValueError:
+                raise ValueError('Some members contain non-numerical characters')
+        else:
+            raise TypeError('Some members have more than one "/"')
         l = i + 1
         ans += frac
-    if i == len(s):
+    if s[i] == '=':
         break
     if s[i] == '+':
         pos = 1
     if s[i] == '-':
         pos = -1
 print(ans)
+
 ```
 
