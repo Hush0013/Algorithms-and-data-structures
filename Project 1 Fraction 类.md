@@ -1,4 +1,5 @@
 class Stack:  # 栈类
+
     def __init__(self):
         self.items = []
 
@@ -22,6 +23,7 @@ class Stack:  # 栈类
 
 
 def gcd(x, y):  # 计算两数的最大公因数
+
     if x == 0:
         return 1
     if abs(x) > abs(y):
@@ -33,6 +35,7 @@ def gcd(x, y):  # 计算两数的最大公因数
 
 
 class Fraction:  # 分数类
+
     def __init__(self, top, bottom):
         self.num = top
         self.den = bottom
@@ -80,6 +83,7 @@ class Fraction:  # 分数类
 
 
 def make_fraction(x):  # 将整数和小数化成分数，便于直接进行计算
+
     if '.' in x:
         x1, x2 = x.split('.')
         xx = Fraction(int(x1) * (10 ** len(x2)) + int(x2), 10 ** len(x2))
@@ -92,6 +96,7 @@ def make_fraction(x):  # 将整数和小数化成分数，便于直接进行计�
 
 
 def calculate(x, y, c):  # 定义加减乘除
+
     xx = make_fraction(x)
     yy = make_fraction(y)
     if c == '+':
@@ -105,6 +110,7 @@ def calculate(x, y, c):  # 定义加减乘除
 
 
 def InfixCalculator(infix):  # 将中序表达式转化为后序表达式，便于使用栈进行计算
+
     pre = {'*': 3, '/': 3, '+': 2, '-': 2, '(': 1, '[': 1, '{': 1}
     ch = '+-*/()[]{}'
     opens = '([{'
