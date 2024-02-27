@@ -1,9 +1,4 @@
-## Project 1 Fraction 类
-
-可以计算带括号的对分数、小数和整数的四则运算，输出结果为分数
-
-```python
-class Stack:
+class Stack:  # 栈类
     def __init__(self):
         self.items = []
 
@@ -26,7 +21,7 @@ class Stack:
         print(self.items)
 
 
-def gcd(x, y):
+def gcd(x, y):  # 计算两数的最大公因数
     if x == 0:
         return 1
     if abs(x) > abs(y):
@@ -37,7 +32,7 @@ def gcd(x, y):
     return gcd(y, x)
 
 
-class Fraction:
+class Fraction:  # 分数类
     def __init__(self, top, bottom):
         self.num = top
         self.den = bottom
@@ -46,7 +41,7 @@ class Fraction:
         self.den //= b
 
     def __str__(self):
-        if self.den == 1:
+        if self.den == 1:  # 分母为1或-1时，将写成整数形式
             return str(self.num)
         if self.den == -1:
             return str(-self.num)
@@ -84,10 +79,10 @@ class Fraction:
         return self.den
 
 
-def make_fraction(x):
+def make_fraction(x):  # 将整数和小数化成分数，便于直接进行计算
     if '.' in x:
-        x1, x2 = map(int, x.split('.'))
-        xx = Fraction(x1 * (10 ** len(str(x2))) + x2, 10 ** len(str(x2)))
+        x1, x2 = x.split('.')
+        xx = Fraction(int(x1) * (10 ** len(x2)) + int(x2), 10 ** len(x2))
     elif '/' in x:
         x1, x2 = map(int, x.split('/'))
         xx = Fraction(x1, x2)
@@ -96,7 +91,7 @@ def make_fraction(x):
     return xx
 
 
-def calculate(x, y, c):
+def calculate(x, y, c):  # 定义加减乘除
     xx = make_fraction(x)
     yy = make_fraction(y)
     if c == '+':
@@ -109,7 +104,7 @@ def calculate(x, y, c):
         return str(xx / yy)
 
 
-def InfixCalculator(infix):
+def InfixCalculator(infix):  # 将中序表达式转化为后序表达式，便于使用栈进行计算
     pre = {'*': 3, '/': 3, '+': 2, '-': 2, '(': 1, '[': 1, '{': 1}
     ch = '+-*/()[]{}'
     opens = '([{'
@@ -144,5 +139,3 @@ def InfixCalculator(infix):
 
 
 print(InfixCalculator(input()))
-```
-
